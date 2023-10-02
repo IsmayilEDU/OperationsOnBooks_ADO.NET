@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationsOnBooks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="MainWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        
+        <!--#region Combobox of Categories-->
+        <Grid Margin="20">
 
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Categories" FontSize="35"/>
+
+            <ComboBox Grid.Column="1" x:Name="combobox_Categories" >
+                
+            </ComboBox>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Combobox of Categories-->
+        <Grid Margin="20">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Authors" FontSize="35"/>
+
+            <ComboBox Grid.Column="1" x:Name="combobox_Authors"  >
+
+            </ComboBox>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Button of search-->
+        <Button Content="Search" Margin="80 20" FontSize="35"/>
+        <!--#endregion-->
+
+    </StackPanel>
 </Window>

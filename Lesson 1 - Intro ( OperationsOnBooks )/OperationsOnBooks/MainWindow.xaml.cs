@@ -38,7 +38,7 @@ namespace OperationsOnBooks
 
         #region ConnectionToLibrary
 
-        private void ExecuteQuery(string query)
+        private void LoadNameOfAuthors(string categoryName)
         {
             try
             {
@@ -47,8 +47,13 @@ namespace OperationsOnBooks
                 connection.Open();
 
                 //  Create command
+                string query = "SELECT FirstName FROM Authors\r\nINNER JOIN Books ON Authors.Id = Books.Id_Author\r\nINNER JOIN Categories ON Categories.Id = Books.Id_Category\r\nWHERE Categories.Name = @name";
                 command = new SqlCommand(query, connection);
 
+                reader = command.ExecuteReader();
+
+                //  Dispose fields
+                
                 command.Dispose();
             }
             catch (Exception ex)
