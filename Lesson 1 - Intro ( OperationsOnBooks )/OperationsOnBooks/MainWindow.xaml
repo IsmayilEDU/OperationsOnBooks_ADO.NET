@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationsOnBooks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
     <StackPanel>
         
         <!--#region Combobox of Categories-->
-        <Grid Margin="20">
+        <Grid Margin="10">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Text="Categories" FontSize="35"/>
+            <TextBlock Text="Categories" FontSize="25"/>
 
             <ComboBox Grid.Column="1" x:Name="combobox_Categories" 
                       ItemsSource="{Binding NamesOfCategories}"
@@ -28,14 +28,14 @@
         <!--#endregion-->
 
         <!--#region Combobox of Authors-->
-        <Grid Margin="20">
+        <Grid Margin="10">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Authors" FontSize="35"/>
+            <TextBlock Text="Authors" FontSize="25"/>
 
             <ComboBox Grid.Column="1" x:Name="combobox_Authors" 
                       ItemsSource="{Binding FirstnamesOfAuthors}" >
@@ -45,7 +45,19 @@
         <!--#endregion-->
 
         <!--#region Button of search-->
-        <Button Content="Search" Margin="80 20" FontSize="35"/>
+        <TextBox x:Name="textbox_Search" FontSize="20" Margin="20 10" Background="AliceBlue"/>
+
+        <Button Content="Search" Width="100" FontSize="25" Click="Button_Click"/>
+
+        <ListView ItemsSource="{Binding Books}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="150" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Pages" Width="150" DisplayMemberBinding="{Binding Pages}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
         <!--#endregion-->
 
     </StackPanel>

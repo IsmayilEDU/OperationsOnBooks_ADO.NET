@@ -51,6 +51,20 @@ namespace OperationsOnBooks
             }
         }
 
+        //  Names of wanted books
+        private List<Book> _books;
+
+        public List<Book> Books
+        {
+            get { return _books; }
+            set 
+            { 
+                _books = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         //  Selected Name Of Categories for search Firstnames of authors
         private string? SelectedNameOfCategories = null;
 
@@ -74,15 +88,58 @@ namespace OperationsOnBooks
                 FillComboboxOfComboboxOfFirstNamesOfAuthorsWithCategoryName(SelectedNameOfCategories);
             }
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (textbox_Search.Text != "")
+            {
+                SearchBooksWithName(textbox_Search.Text);
+            }
+            else
+            {
+                MessageBox.Show("Name couldn't be empty!", "Error");
+            }
+        }
 
 
         #endregion
 
         #region AssistentFunctions
+        private void SearchBooksWithName(string bookName)
+        {
+            try
+            {
+                connection!.Open();
+
+                //  Create command for search books
+                using SqlCommand command = new($"SELECT Id,Name,Pages FROM Books\r\nWHERE Name = '{bookName}'", connection);
+
+                //  Create reader for datas
+                using SqlDataReader reader = command.ExecuteReader();
+
+                //  Add datas to listview
+                Books = new List<Book>();
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader["Id"]);
+                    string name = Convert.ToString(reader["Name"]);
+                    int pages = Convert.ToInt32(reader["Pages"]);
+                    Books.Add(new Book(id, name, pages));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            finally
+            {
+                connection!.Close();
+            }
+        }
         private void OnPropertyChanged([CallerMemberName] string? PrpertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PrpertyName));
         }
+
         private void FillComboboxOfNamesOfCategories()
         {
             //  Create connection 
