@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationsOnBooks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="300" Width="500" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
     <StackPanel>
         
         <!--#region Combobox of Categories-->
@@ -18,13 +19,15 @@
             
             <TextBlock Text="Categories" FontSize="35"/>
 
-            <ComboBox Grid.Column="1" x:Name="combobox_Categories" >
+            <ComboBox Grid.Column="1" x:Name="combobox_Categories" 
+                      ItemsSource="{Binding NamesOfCategories}"
+                      SelectionChanged="combobox_Categories_SelectionChanged">
                 
             </ComboBox>
         </Grid>
         <!--#endregion-->
 
-        <!--#region Combobox of Categories-->
+        <!--#region Combobox of Authors-->
         <Grid Margin="20">
 
             <Grid.ColumnDefinitions>
@@ -34,7 +37,8 @@
 
             <TextBlock Text="Authors" FontSize="35"/>
 
-            <ComboBox Grid.Column="1" x:Name="combobox_Authors"  >
+            <ComboBox Grid.Column="1" x:Name="combobox_Authors" 
+                      ItemsSource="{Binding FirstnamesOfAuthors}" >
 
             </ComboBox>
         </Grid>
